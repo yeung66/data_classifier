@@ -1,0 +1,104 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Item #{{ item[ITEM_ID] }}{% endblock %}
+
+{% block content %}
+    <div class="container" id="top">
+        <div class="page-header">
+            <h3>Item #{{ item[ITEM_ID] }}</h3>
+        </div>
+    </div>
+
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+
+        {% if finished %}
+         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            this item is already classified！
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">item short info</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                {% for f in FIELDS %}
+                    {% if f not in LONG_FIELDS and f not in SPLIT_FIELDS %}
+                        <li>{{f}} : {{ item[f] }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        
+
+        {% for f in long_fields %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ f }}</h3>
+                </div>
+
+                <div class="panel-body">
+                    <p style="white-space: pre-wrap;margin-left: 20px;">{{ long_fields[f] | safe}}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for f in split_fields %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ f }}</h3>
+            </div>
+            <ul class="list-group">
+              {% for content in split_fields[f] %}
+                <li class="list-group-item" style="white-space: pre-wrap">{{content|safe}}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        {% endfor %}
+
+        
+
+        <div class="panel panel-primary" id="bottom">
+            <div class="panel-heading">
+                <h3 class="panel-title">classifier</h3>
+            </div>
+            {% import "bootstrap/wtf.html" as wtf %}
+            {{ wtf.quick_form(form) }}
+            <br>
+
+{#            <button class="btn"><a href="{{ url_for('index') }}">back to index!</a></button>#}
+
+        </div>
+    </div>
+
+
+{#    <div id="backDown" style="z-index: 9999; position: fixed ! important; right: 5px; bottom: 50px;">#}
+{#         <a href="#top">跳到顶部</a>#}
+{#    </div>#}
+    <!-- <div id="backDown" style="z-index: 9999; position: fixed ! important; right: 5px; bottom: 30px;">
+        <a href="#top" style="font-size: 24px">top</a> <br>
+        <a href="#commits" style="font-size: 24px">commits</a> <br>
+        <a href="#bottom" style="font-size: 24px">bottom</a> <br>
+        <a href="{{ url_for('index') }}" style="font-size: 24px">index</a>
+    </div> -->
+
+{% endblock %}
+
