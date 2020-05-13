@@ -11,22 +11,19 @@
 
     <div class="container">
         {% for message in get_flashed_messages() %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        
+        <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         {% endfor %}
 
         {% if finished %}
-         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            this item is already classified！
+         <div class="alert alert-warning">
+            
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-        
+              this item is already classified！
         </div>
         {% endif %}
     </div>
@@ -93,12 +90,11 @@
 {#    <div id="backDown" style="z-index: 9999; position: fixed ! important; right: 5px; bottom: 50px;">#}
 {#         <a href="#top">跳到顶部</a>#}
 {#    </div>#}
-    <!-- <div id="backDown" style="z-index: 9999; position: fixed ! important; right: 5px; bottom: 30px;">
+    <div id="backDown" style="z-index: 9999; position: fixed ! important; right: 5px; bottom: 30px;">
         <a href="#top" style="font-size: 24px">top</a> <br>
-        <a href="#commits" style="font-size: 24px">commits</a> <br>
         <a href="#bottom" style="font-size: 24px">bottom</a> <br>
         <a href="{{ url_for('index') }}" style="font-size: 24px">index</a>
-    </div> -->
+    </div>
 
 {% endblock %}
 

@@ -8,7 +8,12 @@ def read_json_obj(filepath,encoding="UTF-8"):
         obj = json.load(f)
     return obj
 
+
 CONFIG = read_json_obj(CONFIG_PATH)
+
+def write_result(result,path=CONFIG['result']):
+    with open(path, 'w') as f:
+        f.write(json.dumps(result, indent=2))
 
 DATA_PATH = CONFIG['sourceDataPath']
 ITEM_ID = CONFIG['itemId']
@@ -33,5 +38,7 @@ except FileNotFoundError:
 result_fields = CONFIG['resultOptions']
 
 left_data = [item for item in DATA if item not in results]
+
+random.shuffle(left_data)
 
 

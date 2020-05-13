@@ -1,0 +1,17 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+    
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+</div>
+<h1>current: {{ done }}/{{ all }}</h1>
+<h2>next item is <a href="{{ url_for('item',item_id=next) }}">{{ next }}</a></h2>
+{% endblock content %}
