@@ -22,7 +22,7 @@ python app.py
 
 According to your need to modify the `config.json`
 
-```json
+```javascript
 {
     "sourceDataPath": "data/source/data.json",//source data path
     "itemId": "bug_id", // id used to identify every data item
@@ -65,7 +65,7 @@ According to your need to modify the `config.json`
 
 results is stored as a json file.
 
-```json
+```javascript
 {
   "12266": {
     "field1": 1,
