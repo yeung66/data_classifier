@@ -79,12 +79,13 @@ def item(item_id):
         else:
             return redirect(url_for('index'))
 
+    finished = False
     if item_id in results:
         old_resuls = results[item_id]
         form = ItemForm(data = old_resuls)
         finished = True
         flash('This item is already classified!')
-
+    
     long_fields = {f:item[f].replace('\n','<br>') for f in LONG_FIELDS}
     split_fields = {}
     for field in SPLIT_FIELDS:
